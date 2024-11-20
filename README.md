@@ -127,6 +127,36 @@ You can freely interrupt the model at any time in push-to-talk or VAD mode.
 
 ## Configuration
 
+
+### Audio Configuration on Windows
+
+It is important to have functional Audio Echo Cancellation (AEC) on the device running the samples to ensure clear audio playback and recording. 
+
+
+1. **Open Control Panel**:
+   - Press `Windows + R` to open the Run dialog.
+   - Type `control` and press `Enter` to open the Control Panel.
+
+2. **Navigate to Sound Settings**:
+   - In the Control Panel, click on **Hardware and Sound**.
+   - Click on **Sound** to open the Sound settings dialog.
+
+3. **Select Recording Device**:
+   - In the Sound settings window, navigate to the **Recording** tab.
+   - Locate and e.g. select **Microphone Array** from the list of recording devices.
+   - Click **Properties** to open the Microphone Properties dialog for the selected device.
+
+4. **Enable Audio Enhancements**:
+   - In the Microphone Properties dialog, navigate to the **Advanced** tab.
+   - Under the **Signal Enhancements** section, look for the option labeled **Enable audio enhancements**.
+   - Check the box next to **Enable audio enhancements** to allow extra signal processing by the audio device.
+
+5. **Apply and Confirm Changes**:
+   - Click **Apply** to save the changes.
+   - Click **OK** to exit the Microphone Properties dialog.
+   - Click **OK** in the Sound settings window to close it.
+
+
 ### Using a Relay Server
 
 If you would like to build a more robust implementation and play around with the reference client using your own server, a Node.js Relay Server is included in the `relay-server` folder.
