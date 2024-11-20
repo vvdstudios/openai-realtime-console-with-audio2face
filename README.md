@@ -1,4 +1,4 @@
-# OpenAI Realtime Console with Audio2Face Integration by (Vivid Studios)
+# OpenAI Realtime Console with Audio2Face Integration
 
 This project is a modified version of the OpenAI Realtime Console that integrates with NVIDIA's Audio2Face (A2F). It allows you to interact with an AI assistant in real-time while visualizing the assistant's responses through facial animations provided by A2F. The integration is achieved using a Python WebSocket server (`ws.py`) located in the `python-backend` folder.
 
