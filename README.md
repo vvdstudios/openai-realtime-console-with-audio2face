@@ -52,7 +52,7 @@ This project extends the OpenAI Realtime Console by integrating it with NVIDIA's
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/your-repo.git
+   git clone git@github.com:vvdstudios/openai-realtime-console-with-audio2face.git
    cd your-repo
    ```
 
