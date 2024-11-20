@@ -27,7 +27,7 @@ audio_queue = queue.Queue()
 interrupt_event = threading.Event()
 shutdown_event = threading.Event()
 
-async def audio_handler(websocket, path):
+async def audio_handler(websocket):
     logging.info("Client connected")
     clients.add(websocket)
     try:
