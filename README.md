@@ -53,7 +53,7 @@ This project extends the OpenAI Realtime Console by integrating it with NVIDIA's
 
    ```bash
    git clone git@github.com:vvdstudios/openai-realtime-console-with-audio2face.git
-   cd your-repo
+   cd openai-realtime-console-with-audio2face
    ```
 
 2. **Set Up the Python Environment**
@@ -68,7 +68,7 @@ This project extends the OpenAI Realtime Console by integrating it with NVIDIA's
 
    ```bash
    python -m venv venv
-   source venv/bin/activate   # On Windows, use 'venv\Scripts\activate'
+   'venv\Scripts\activate'
    ```
 
    Install Python dependencies:
