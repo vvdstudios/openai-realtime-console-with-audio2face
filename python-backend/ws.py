@@ -20,7 +20,16 @@ logging.basicConfig(
 # Initialize Audio2Face
 a2f = Audio2Face()
 a2f.init_a2f(streaming=True)
-
+# Enable Live-Lynk streaming
+try:
+    payload = {
+        "node_path": "/World/audio2face/StreamLivelink",
+        "value": True
+    }
+    a2f.post("A2F/Exporter/ActivateStreamLivelink", payload)
+    logging.info("Live-Lynk streaming activated")
+except Exception as e:
+    logging.error(f"Failed to activate Live-Lynk: {e}")
 # Global variables to control the server
 clients = set()
 audio_queue = queue.Queue()

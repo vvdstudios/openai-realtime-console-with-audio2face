@@ -46,6 +46,13 @@ interface Coordinates {
   };
 }
 
+
+
+interface LightResponse {
+  success: boolean;
+  currentLevel: number;
+}
+
 /**
  * Type for all event logs
  */
@@ -74,6 +81,7 @@ export function ConsolePage() {
    * Create a reference for the WebSocket
    */
   const websocketRef = useRef<WebSocket | null>(null);
+  const [currentLightLevel, setCurrentLightLevel] = useState<number>(1.0);
 
   /**
    * Instantiate:
@@ -435,6 +443,8 @@ export function ConsolePage() {
 
     // Set instructions
     client.updateSession({ instructions: instructions });
+    client.updateSession({ voice: 'echo' });
+
     // Set transcription, otherwise we don't get user transcriptions back
     client.updateSession({ input_audio_transcription: { model: 'whisper-1' } });
 
@@ -509,6 +519,59 @@ export function ConsolePage() {
         };
         setMarker({ lat, lng, location, temperature, wind_speed });
         return json;
+      }
+    );
+
+
+    client.addTool(
+      {
+        name: 'set_light_level',
+        description: 'Controls the light level by sending a value between 0 (off) and 1 (full brightness)',
+        parameters: {
+          type: 'object',
+          properties: {
+            level: {
+              type: 'number',
+              minimum: 0,
+              maximum: 1,
+              description: 'Light level between 0 (off) and 1 (full brightness)',
+            },
+          },
+          required: ['level'],
+        },
+      },
+      async ({ level }: { level: number }) => {
+        try {
+          // Ensure level is between 0 and 1
+          const normalizedLevel = Math.max(0, Math.min(1, level));
+          
+          // Send HTTP request to control lights - note the correct port 9980
+          const response = await fetch('http://localhost:9980/light', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ level: normalizedLevel }),
+          });
+    
+          const result = await response.json();
+          
+          // Update local state
+          setCurrentLightLevel(normalizedLevel);
+          
+          return {
+            success: result.success,
+            level: normalizedLevel,
+            message: `Light level set to ${Math.round(normalizedLevel * 100)}%`
+          };
+        } catch (error) {
+          console.error('Error setting light level:', error);
+          return {
+            success: false,
+            level: currentLightLevel,
+            message: 'Failed to set light level'
+          };
+        }
       }
     );
 
