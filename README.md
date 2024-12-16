@@ -16,7 +16,6 @@ This project is a modified version of the OpenAI Realtime Console that integrate
    - [Starting the Console](#starting-the-console)
    - [Interacting with the Assistant](#interacting-with-the-assistant)
 4. [Configuration](#configuration)
-   - [Using a Relay Server](#using-a-relay-server)
 5. [Python Backend](#python-backend)
 6. [Realtime API Reference Client](#realtime-api-reference-client)
    - [Sending Streaming Audio](#sending-streaming-audio)
@@ -157,35 +156,6 @@ It is important to have functional Audio Echo Cancellation (AEC) on the device r
    - Click **OK** in the Sound settings window to close it.
 
 
-### Using a Relay Server
-
-If you would like to build a more robust implementation and play around with the reference client using your own server, a Node.js Relay Server is included in the `relay-server` folder.
-
-Start the relay server with:
-
-```bash
-npm run relay
-```
-
-It will start automatically on `localhost:8081`.
-
-**You will need to create a `.env` file** with the following configuration:
-
-```env
-OPENAI_API_KEY=YOUR_API_KEY
-REACT_APP_LOCAL_RELAY_SERVER_URL=http://localhost:8081
-```
-
-You will need to restart both your React app and relay server for the `.env` changes to take effect. The local server URL is loaded via [`ConsolePage.tsx`](/src/pages/ConsolePage.tsx):
-
-```javascript
-const LOCAL_RELAY_SERVER_URL: string =
-  process.env.REACT_APP_LOCAL_RELAY_SERVER_URL || '';
-```
-
-To stop using the relay server at any time, simply delete the environment variable or set it to an empty string.
-
----
 
 ## Python Backend
 
@@ -502,10 +472,7 @@ add16BitPCM(arrayBuffer, trackId = 'default') {
 
 ## Acknowledgments
 
-Special thanks to the OpenAI Realtime API team and NVIDIA for providing the tools and resources to make this integration possible.
+Special thanks to the OpenAI Realtime API team and NVIDIA and Py_audio2face developers for providing the tools and resources to make this integration possible.
 
 ---
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
